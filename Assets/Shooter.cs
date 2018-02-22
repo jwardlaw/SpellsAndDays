@@ -13,11 +13,13 @@ public class Shooter : MonoBehaviour {
 
     public GameObject spawnPoint;
 
+    public AudioSource launch;
     public float projectileForce = 5f;
 
 	// Use this for initialization
 	void Start ()
     {
+        launch = GetComponent<AudioSource>();
         staticCam = Camera.main.gameObject;
 	}
 	
@@ -28,6 +30,7 @@ public class Shooter : MonoBehaviour {
 
     void Shoot()
     {
+        launch.Play();
         GameObject p = (GameObject)GameObject.Instantiate(Resources.Load("Fireball"), spawnPoint.transform.position, spawnPoint.transform.rotation);
         p.GetComponent<Rigidbody>().AddForce(p.transform.forward * projectileForce);
         p.GetComponent<Projectile>().staticCam = staticCam;

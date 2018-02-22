@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour {
     public Camera flyingCam;
     public Shooter shooter;
     public Transform Player;
+    public AudioSource loop;
 
     Rigidbody rb;
     SphereCollider s;
@@ -21,6 +22,7 @@ public class Projectile : MonoBehaviour {
         flyingCam = GetComponentInChildren<Camera>();
         s = GetComponent<SphereCollider>();
         Player = GameObject.Find("Player").transform;
+        loop = GetComponent<AudioSource>();
 	}
 
     IEnumerator CollisionCoroutine()
@@ -33,6 +35,7 @@ public class Projectile : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
+        loop.Stop();
         s.enabled = false;
         rb.isKinematic = true;
         Instantiate(Resources.Load("Explosion"), transform.position, transform.rotation);
