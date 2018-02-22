@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour {
 
-    public Camera staticCam;
-    public Camera flyingCam;
+    public GameObject staticCam;
+    public GameObject flyingCam;
 
     public float angle = 5f;
     private float angleMin = 0f;
     private float angleMax = 40f;
 
     public GameObject spawnPoint;
-    private Vector3 firingAngle;
 
     public float projectileForce = 5f;
 
 	// Use this for initialization
 	void Start ()
     {
-        firingAngle = new Vector3(spawnPoint.transform.rotation.x, spawnPoint.transform.rotation.y, spawnPoint.transform.rotation.z);
-        staticCam = Camera.main;
+        staticCam = Camera.main.gameObject;
 	}
 	
 	// Update is called once per frame
@@ -34,7 +32,7 @@ public class Shooter : MonoBehaviour {
         p.GetComponent<Rigidbody>().AddForce(p.transform.forward * projectileForce);
         p.GetComponent<Projectile>().staticCam = staticCam;
         p.GetComponent<Projectile>().shooter = this;
-        staticCam.enabled = false;
+        staticCam.SetActive(false);
         this.enabled = false;
     }
 

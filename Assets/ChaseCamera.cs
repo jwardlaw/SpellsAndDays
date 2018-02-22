@@ -24,7 +24,9 @@ public class ChaseCamera : MonoBehaviour {
         x = angles.y;
         y = angles.x;
 
+        y = -30;
         rigidbody = GetComponent<Rigidbody>();
+        
 
         // Make the rigid body not change rotation
         if (rigidbody != null)
@@ -50,7 +52,7 @@ public class ChaseCamera : MonoBehaviour {
                 distance -= hit.distance;
             }
             Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
-            Vector3 position = rotation * negDistance + target.position;
+            Vector3 position = rotation * negDistance + target.position + Vector3.up*4;
 
             transform.rotation = rotation;
             transform.position = position;
